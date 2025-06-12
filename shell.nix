@@ -1,8 +1,8 @@
 let
   nixpkgs = builtins.fetchTarball {
-    # https://github.com/NixOS/nixpkgs/tree/nixos-21.05 on 2021-09-12
-    url = "https://github.com/nixos/nixpkgs/archive/8b0b81dab17753ab344a44c04be90a61dc55badf.tar.gz";
-    sha256 =  "0rj17jpjxjcibcd4qygpxbq79m4px6b35nqq9353pns8w7a984xx";
+    # https://github.com/NixOS/nixpkgs/tree/release-25.05 latest commit
+    url = "https://github.com/nixos/nixpkgs/archive/9ba04bda9249d5d5e5238303c9755de5a49a79c5.tar.gz";
+    sha256 = "05im0w8g3hhqgimahllxrnqjzx21zmg6g7qfwq4w2862clgpihhz";
   };
   pkgs = import nixpkgs { config = { allowUnfree = true; }; };
 in
@@ -10,14 +10,16 @@ in
 pkgs.mkShell {
   name = "dev-shell";
   buildInputs = [
-    pkgs.pipenv
+    pkgs.python311
+    pkgs.poetry
     pkgs.codespell
+    pkgs.pre-commit
   ];
 
   shellHook = ''
-  # create virtualenv in ./.venv
-  export PIPENV_VENV_IN_PROJECT=1
-  # pipenv reports it needs this
+  # configure poetry to create virtualenv in ./.venv
+  export POETRY_VENV_IN_PROJECT=1
+  # poetry reports it needs this
   export LANG=en_US.UTF-8
   # support for building wheels:
   # https://nixos.org/nixpkgs/manual/#python-setup.py-bdist_wheel-cannot-create-.whl

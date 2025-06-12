@@ -1,5 +1,14 @@
 ## Changelog
 
+1.0.0
+-----------
+
+* Init `pyramid_customerio`, forked from `pyramid_mixpanel`.
+
+---
+
+## Historical Changelog (from pyramid_mixpanel)
+
 0.13.0 (2024-03-08)
 -------------------
 
